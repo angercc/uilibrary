@@ -204,21 +204,14 @@ function library:CreateWindow(name, size, hidebutton)
         window.theme = (theme or library.theme)
     end
 
-    local objects = {}
-
-    function window:setTheme(theme, color3)
-        library.theme[theme] = color3
-        
-        for property, objects in pairs(objects[theme]) do
-            for i, object in pairs(objects) do
-                if not object.Parent or (object.Name == "Button" and object.Parent.Name == "ColorPicker") then
-                    objects[i] = nil -- i can do this because weak tables :D
-                else
-                    object[property] = color3
-                end
-            end
-        end
-    end
+    local function ChangeColor(Color)
+		library.theme.accentcolor = Color
+		for i, v in pairs(library.ColorTable) do
+			if v.BackgroundColor3 ~= Color3.fromRGB(50, 50, 50) then
+				v.BackgroundColor3 = Color
+			end
+		end
+	end
 
     window.Main = Instance.new("ScreenGui", coregui)
     window.Main.Name = name
