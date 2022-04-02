@@ -206,7 +206,7 @@ function library:CreateWindow(name, size, hidebutton)
 
     local objects = {}
 
-    function library:setTheme(theme, color3)
+    function window:setTheme(theme, color3)
         library.theme[theme] = color3
         
         for property, objects in pairs(objects[theme]) do
